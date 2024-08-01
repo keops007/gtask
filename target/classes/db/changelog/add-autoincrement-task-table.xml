@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="2" author="author_name">
+        <createSequence sequenceName="task_id_seq" startValue="1" incrementBy="1"/>
+    </changeSet>
+
+    <changeSet id="3" author="author_name">
+        <addColumn tableName="task">
+            <column name="new_id" type="bigint"/>
+        </addColumn>
+
+        <update tableName="task">
+            <column name="new_id" valueComputed="nextval('task_id_seq')"/>
+        </update>
+
+        <dropColumn tableName="task" columnName="id"/>
+
+        <renameColumn tableName="task" oldColumnName="new_id" newColumnName="id"/>
+    </changeSet>
+
+    <changeSet id="4" author="author_name">
+        <addAutoIncrement tableName="task" columnName="id" incrementBy="1" startWith="1"/>
+    </changeSet>
+</databaseChangeLog>
