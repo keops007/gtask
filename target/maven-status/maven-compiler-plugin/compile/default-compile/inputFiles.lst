@@ -1,0 +1,13 @@
+/Users/catalin/Learn/gtask/src/main/java/com/run/gtask/repository/TaskRepository.java
+/Users/catalin/Learn/gtask/src/main/java/com/run/gtask/controller/UserController.java
+/Users/catalin/Learn/gtask/src/main/java/com/run/gtask/dto/UserDTO.java
+/Users/catalin/Learn/gtask/src/main/java/com/run/gtask/entity/Task.java
+/Users/catalin/Learn/gtask/src/main/java/com/run/gtask/controller/TaskController.java
+/Users/catalin/Learn/gtask/src/main/java/com/run/gtask/GtaskApplication.java
+/Users/catalin/Learn/gtask/src/main/java/com/run/gtask/entity/User.java
+/Users/catalin/Learn/gtask/src/main/java/com/run/gtask/service/TaskService.java
+/Users/catalin/Learn/gtask/src/main/java/com/run/gtask/mapper/TaskMapper.java
+/Users/catalin/Learn/gtask/src/main/java/com/run/gtask/repository/UserRepository.java
+/Users/catalin/Learn/gtask/src/main/java/com/run/gtask/mapper/UserMapper.java
+/Users/catalin/Learn/gtask/src/main/java/com/run/gtask/dto/TaskDTO.java
+/Users/catalin/Learn/gtask/src/main/java/com/run/gtask/service/UserService.java

@@ -13,4 +13,7 @@
 
     <!-- Include user table changeLog file -->
     <include file="db/changelog/user-table-changeset.xml"/>
+
+    <!-- Include raport table changeLog file -->
+    <include file="db/changelog/add-raport-table.xml"/>
 </databaseChangeLog>
