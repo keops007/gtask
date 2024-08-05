@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- Add user_id column to task table if it does not already exist -->
+    <changeSet id="1" author="author_name">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="task" columnName="user_id"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="task">
+            <column name="user_id" type="bigint" />
+        </addColumn>
+    </changeSet>
+
+    <!-- Update existing rows to set a default user_id (adjust the value according to your user IDs) -->
+    <changeSet id="2" author="author_name">
+        <update tableName="task">
+            <column name="user_id" value="1" /> <!-- Setează user_id pentru rândurile existente -->
+            <where>user_id IS NULL</where>
+        </update>
+    </changeSet>
+
+    <!-- Alter user_id column to NOT NULL after updating existing rows -->
+    <changeSet id="3" author="author_name">
+        <addNotNullConstraint tableName="task" columnName="user_id" columnDataType="bigint"/>
+    </changeSet>
+
+</databaseChangeLog>

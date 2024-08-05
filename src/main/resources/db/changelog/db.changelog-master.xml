@@ -16,4 +16,7 @@
 
     <!-- Include raport table changeLog file -->
     <include file="db/changelog/add-raport-table.xml"/>
+
+    <include file="db/changelog/db.changelog-user-modifications.xml"/>
+    <include file="db/changelog/db.changelog-task-modifications.xml"/>
 </databaseChangeLog>

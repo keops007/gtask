@@ -2,6 +2,9 @@ package com.run.gtask.controller;
 
 import com.run.gtask.dto.TaskDTO;
 import com.run.gtask.entity.Task;
+import com.run.gtask.entity.User;
+import com.run.gtask.repository.TaskRepository;
+import com.run.gtask.repository.UserRepository;
 import com.run.gtask.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +16,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/tasks")
 public class TaskController {
+
+    @Autowired
+    private TaskRepository taskRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     private final TaskService taskService;
 
@@ -46,5 +55,25 @@ public class TaskController {
     @DeleteMapping("{id}")
     public void deleteTask(Long id) {
         taskService.deleteTask(id);
+    }
+
+    // Endpoint pentru asignarea unui task unui utilizator
+    @PostMapping("/{taskId}/assign/{userId}")
+    public ResponseEntity<String> assignTaskToUser(@PathVariable Long taskId, @PathVariable Long userId) {
+        Task task = taskRepository.findById(taskId)
+                .orElseThrow(() -> new RuntimeException("Task not found"));
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        task.setUser(user); // Asignarea utilizatorului la task
+        taskRepository.save(task); // Salvează task-ul actualizat
+
+        return ResponseEntity.ok("Task assigned to user");
+    }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<TaskDTO>> getTasksByUserId(@PathVariable Long userId) {
+        List<TaskDTO> tasks = taskService.getTasksByUserId(userId);
+        return ResponseEntity.ok(tasks);
     }
 }

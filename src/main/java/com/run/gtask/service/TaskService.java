@@ -65,4 +65,10 @@ public class TaskService {
         }
         // Nu aruncăm excepție, dar putem adăuga un log aici dacă este necesar
     }
+
+    public List<TaskDTO> getTasksByUserId(Long userId) {
+        return taskRepository.findByUserId(userId).stream()
+                .map(taskMapper::toDto)
+                .collect(Collectors.toList());
+    }
 }
