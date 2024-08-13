@@ -1,10 +1,12 @@
 package com.run.gtask.controller;
 
+import com.run.gtask.dto.CommentDTO;
 import com.run.gtask.dto.TaskDTO;
 import com.run.gtask.entity.Task;
 import com.run.gtask.entity.User;
 import com.run.gtask.repository.TaskRepository;
 import com.run.gtask.repository.UserRepository;
+import com.run.gtask.service.CommentService;
 import com.run.gtask.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/tasks")
 public class TaskController {
+
+    @Autowired
+    private CommentService commentService;
 
     @Autowired
     private TaskRepository taskRepository;
@@ -75,5 +80,15 @@ public class TaskController {
     public ResponseEntity<List<TaskDTO>> getTasksByUserId(@PathVariable Long userId) {
         List<TaskDTO> tasks = taskService.getTasksByUserId(userId);
         return ResponseEntity.ok(tasks);
+    }
+
+    @PostMapping("/{taskId}/comments")
+    public ResponseEntity<CommentDTO> addComment(@PathVariable Long taskId, @RequestBody CommentDTO commentDTO) {
+        return new ResponseEntity<>(commentService.addCommentToTask(taskId, commentDTO), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{taskId}/comments")
+    public ResponseEntity<List<CommentDTO>> getComments(@PathVariable Long taskId) {
+        return new ResponseEntity<>(commentService.getCommentsForTask(taskId), HttpStatus.OK);
     }
 }
