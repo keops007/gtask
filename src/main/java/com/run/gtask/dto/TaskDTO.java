@@ -12,5 +12,7 @@ public class TaskDTO {
     private String description;
     private String title;
     private Boolean completed;
-    private Long userId; // Adaugă acest câmp
+    private Long userId;
+
+    private EstimatedTimeDTO estimatedTime;
 }

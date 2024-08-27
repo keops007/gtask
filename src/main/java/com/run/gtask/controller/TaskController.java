@@ -91,4 +91,12 @@ public class TaskController {
     public ResponseEntity<List<CommentDTO>> getComments(@PathVariable Long taskId) {
         return new ResponseEntity<>(commentService.getCommentsForTask(taskId), HttpStatus.OK);
     }
+
+    @PutMapping("/{taskId}/estimated-time/{estimatedTimeId}")
+    public ResponseEntity<TaskDTO> associateEstimatedTime(
+            @PathVariable Long taskId,
+            @PathVariable Long estimatedTimeId) {
+        TaskDTO updatedTask = taskService.associateEstimatedTime(taskId, estimatedTimeId);
+        return new ResponseEntity<>(updatedTask, HttpStatus.OK);
+    }
 }

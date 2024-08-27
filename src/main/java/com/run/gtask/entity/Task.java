@@ -46,4 +46,8 @@ public class Task {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "estimated_time_id") // Câmpul de referință către EstimatedTime
+    private EstimatedTime estimatedTime;
 }

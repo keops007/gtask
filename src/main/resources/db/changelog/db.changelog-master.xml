@@ -23,5 +23,7 @@
 
     <include file="db/changelog/add-comments-table.xml"/>
 
+    <include file="db/changelog/add-estimated-time-to-task.xml"/>
+
 
 </databaseChangeLog>

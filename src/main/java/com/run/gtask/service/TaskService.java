@@ -1,9 +1,12 @@
 package com.run.gtask.service;
 
 import com.run.gtask.dto.TaskDTO;
+import com.run.gtask.entity.EstimatedTime;
 import com.run.gtask.entity.Task;
 import com.run.gtask.mapper.TaskMapper;
+import com.run.gtask.repository.EstimatedTimeRepository;
 import com.run.gtask.repository.TaskRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +25,9 @@ public class TaskService {
         this.taskRepository = taskRepository;
         this.taskMapper = taskMapper;
     }
+
+    @Autowired
+    private EstimatedTimeRepository estimatedTimeRepository;
 
     public List<TaskDTO> getAllTasks() {
         return taskRepository.findAll()
@@ -63,12 +69,25 @@ public class TaskService {
         if (taskRepository.existsById(id)) {
             taskRepository.deleteById(id);
         }
-        // Nu aruncăm excepție, dar putem adăuga un log aici dacă este necesar
     }
 
     public List<TaskDTO> getTasksByUserId(Long userId) {
         return taskRepository.findByUserId(userId).stream()
                 .map(taskMapper::toDto)
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public TaskDTO associateEstimatedTime(Long taskId, Long estimatedTimeId) {
+        Task task = taskRepository.findById(taskId)
+                .orElseThrow(() -> new RuntimeException("Task not found"));
+
+        EstimatedTime estimatedTime = estimatedTimeRepository.findById(estimatedTimeId)
+                .orElseThrow(() -> new RuntimeException("Estimated time not found"));
+
+        task.setEstimatedTime(estimatedTime);
+        Task updatedTask = taskRepository.save(task);
+
+        return taskMapper.toDto(updatedTask);
     }
 }

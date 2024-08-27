@@ -5,8 +5,15 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <!-- Creează tabelul task cu coloana id ca primary key -->
+    <!-- Precondițiile trebuie plasate la începutul changeset-ului -->
+    <!-- Asigură-te că tabela task are constrângerea PRIMARY KEY -->
     <changeSet id="1" author="author_name">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="task"/>
+            </not>
+        </preConditions>
+
         <createTable tableName="task">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -15,8 +22,19 @@
         </createTable>
     </changeSet>
 
-    <!-- Creează tabelul comments cu relația către task -->
+    <!-- Adaugă constrângerea PRIMARY KEY pe tabela task -->
     <changeSet id="2" author="author_name">
+        <addPrimaryKey columnNames="id" tableName="task"/>
+    </changeSet>
+
+    <!-- Creează tabela comments -->
+    <changeSet id="3" author="author_name">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="comments"/>
+            </not>
+        </preConditions>
+
         <createTable tableName="comments">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -32,6 +50,7 @@
             </column>
         </createTable>
 
+        <!-- Adaugă constrângerea de cheie străină după ce tabela este creată -->
         <addForeignKeyConstraint baseTableName="comments"
                                  baseColumnNames="task_id"
                                  referencedTableName="task"
