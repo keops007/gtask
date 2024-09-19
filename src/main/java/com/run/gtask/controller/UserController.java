@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
-
+    //aici mai trebuia facut un endpoint
     @Autowired
     private UserService userService;
 

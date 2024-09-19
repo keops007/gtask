@@ -17,10 +17,9 @@
         </addColumn>
     </changeSet>
 
-    <!-- Update existing rows to set a default user_id (adjust the value according to your user IDs) -->
     <changeSet id="2" author="author_name">
         <update tableName="task">
-            <column name="user_id" value="1" /> <!-- Setează user_id pentru rândurile existente -->
+            <column name="user_id" value="1" />
             <where>user_id IS NULL</where>
         </update>
     </changeSet>

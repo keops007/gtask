@@ -71,7 +71,7 @@ public class TaskController {
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         task.setUser(user); // Asignarea utilizatorului la task
-        taskRepository.save(task); // Salvează task-ul actualizat
+        taskRepository.save(task); // Salvează task-ul updatat
 
         return ResponseEntity.ok("Task assigned to user");
     }

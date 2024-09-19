@@ -55,14 +55,13 @@ public class TaskService {
             return taskMapper.toDto(task);
         }
 
-        // Returnează null dacă task-ul nu este găsit
         return null;
     }
 
     public TaskDTO getTaskById(Long id) {
         return taskRepository.findById(id)
                 .map(taskMapper::toDto)
-                .orElse(null); // Returnează null dacă task-ul nu este găsit
+                .orElse(null);
     }
 
     public void deleteTask(Long id) {

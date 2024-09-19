@@ -5,16 +5,12 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <!-- Include initial changeLog file -->
     <include file="db/changelog/initial-changeset.xml"/>
 
-    <!-- Include initial changeLog file -->
     <include file="db/changelog/add-autoincrement-task-table.xml"/>
 
-    <!-- Include user table changeLog file -->
     <include file="db/changelog/user-table-changeset.xml"/>
 
-    <!-- Include raport table changeLog file -->
     <include file="db/changelog/add-raport-table.xml"/>
 
     <include file="db/changelog/db.changelog-user-modifications.xml"/>

@@ -13,8 +13,8 @@ public class EstimatedTime {
     private Long id;
 
     @Column(nullable = false)
-    private String description; // Descrierea opțiunii, ex: "1 oră", "2 ore", "Half day", etc.
+    private String description;
 
     @Column(name = "hours", nullable = false)
-    private int hours; // Timpul estimat în ore
+    private int hours; // Timpul estimat în ore, ideal era sa fie minute, dar mi-am dat seama ulterior
 }
